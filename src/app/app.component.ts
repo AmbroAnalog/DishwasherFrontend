@@ -1,19 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Meta } from '@angular/platform-browser';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+
+export class AppComponent {
   title = 'DishwasherFrontend';
 
-  constructor(private metaService: Meta) {}
-
-  ngOnInit() {
-    this.metaService.addTags([
-      {name: 'color-scheme', content: 'dark'},
-    ]);
-  }
 }
