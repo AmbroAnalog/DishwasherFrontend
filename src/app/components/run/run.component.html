@@ -1,0 +1,7 @@
+<th scope="row"></th>
+<td>{{ getProgramName(run.program_selected_id) }}</td>
+<td>vor {{ calculateDateRange(run.program_time_start) }}</td>
+<td>{{ run.program_runtime / 60 | number: '1.0-0' }} minuten
+  <div *ngIf="run | isRunning; then thenBlock"></div>
+  <ng-template #thenBlock><b>running...</b></ng-template>
+</td>

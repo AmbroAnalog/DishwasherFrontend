@@ -1,0 +1,25 @@
+<br>
+<h2>Device List</h2>
+<!--<app-device *ngFor="let device of devices" [device]="devices"
+            >
+-->
+<div class="row" *ngFor="let device of devices" device-row [device]="device">
+</div>
+
+<hr>
+
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th scope="col"></th>
+    <th scope="col">Modus</th>
+    <th scope="col">Zeit</th>
+    <th scope="col">Laufzeit</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let run of runs" run-table-row [run]="run">
+    </tr>
+  </tbody>
+</table>
+

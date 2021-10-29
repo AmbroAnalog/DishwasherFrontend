@@ -1,24 +1,43 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HttpClientModule } from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
+import { NgxGaugeModule } from "ngx-gauge";
+import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
 
 import { AppRoutingModule } from './app-routing.module';
+import { isOnline, isRunning } from './dishwasher.pipe';
 import { AppComponent } from './app.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeaderComponent } from './components/header/header.component';
-import { DeviceListComponent } from './components/device-list/device-list.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
 import { DeviceComponent } from './components/device/device.component';
+import { RunComponent } from './components/run/run.component';
+import { LiveComponent } from './components/live/live.component';
+
+import { environment } from '../environments/environment';
+
+const config: SocketIoConfig = { url: environment.api_root_url, options: {} };
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    DeviceListComponent,
-    DeviceComponent
+    HomepageComponent,
+    DeviceComponent,
+    RunComponent,
+    isOnline,
+    isRunning,
+    LiveComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule,
+    HttpClientModule,
+    NgxGaugeModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]

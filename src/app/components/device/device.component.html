@@ -1,1 +1,19 @@
-<p>device works!</p>
+<div class="col-2">
+  <img src="assets/dishwasher_white.png" alt="Dishwasher" style="width: 100%">
+</div>
+<div class="col">
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <div *ngIf="device | isOnline; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock><div class="blob"></div></ng-template>
+      <ng-template #elseBlock><i>offline</i></ng-template>
+    </div>
+    <div class="col">
+      <h4>{{ device.unique_device_identifier }}</h4>
+    </div>
+  </div>
+
+  <small>{{ device.document_id }}</small>
+  <p>Zuletzt Online: {{ device.last_alive * 1000| date:'HH:mm dd.MM.yyyy' }}</p>
+  <p>vor {{ calculateDateRange(device.last_alive) }}</p>
+</div>

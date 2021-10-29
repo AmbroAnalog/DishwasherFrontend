@@ -1,0 +1,58 @@
+<h3>Laufzeit noch ~44 min.</h3>
+
+<div class="progress">
+  <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 11%"></div>
+</div>
+<br>
+
+<div class="row text-center">
+  <div class="col-5">
+    <div class="btn-group-vertical mr-2" role="group" aria-label="First group">
+      <button type="button" class="btn btn-secondary">Stop - Start</button>
+      <button type="button" class="btn btn-secondary active"><div class="spinner-grow spinner-grow-sm" role="status"></div> 1. Vorspülen</button>
+      <button type="button" class="btn btn-secondary"><div class="spinner-grow spinner-grow-sm" role="status"></div> 2. Vorspülen</button>
+      <button type="button" class="btn btn-secondary"><div class="spinner-grow spinner-grow-sm" role="status"></div> Reinigen</button>
+      <button type="button" class="btn btn-secondary"><div class="spinner-grow spinner-grow-sm" role="status"></div> Zwichenspülen</button>
+      <button type="button" class="btn btn-secondary"><div class="spinner-grow spinner-grow-sm" role="status"></div> Klarspülen</button>
+      <button type="button" class="btn btn-secondary"><div class="spinner-grow spinner-grow-sm" role="status"></div> Trocknen</button>
+      <button type="button" class="btn btn-secondary"><div class="spinner-grow spinner-grow-sm" role="status"></div> Auslaufen</button>
+    </div>
+  </div>
+  <div class="col-7">
+      <ngx-gauge
+        [value]="gaugeValue"
+        [thick]="gaugeThickness"
+        [min]="gaugeMin"
+        [max]="gaugeMax"
+        label="Temperatur"
+        type="semi"
+        append="°C">
+      </ngx-gauge>
+    <table>
+      <tr>
+        <th><input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-on="AN" data-off="AUS" disabled></th>
+        <th>Umwelzpumpe</th>
+      </tr>
+      <tr>
+        <th><input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-on="AN" data-off="AUS" disabled></th>
+        <th>Ablaufpumpe</th>
+      </tr>
+      <tr>
+        <th><input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-on="AN" data-off="AUS" disabled></th>
+        <th>Einlaufventil</th>
+      </tr>
+      <tr>
+        <th><input type="checkbox" data-toggle="toggle" data-onstyle="success" data-on="AN" data-off="AUS" disabled></th>
+        <th>Heizung</th>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<br>
+
+<p>Nach aktueller vorhersage ist das gewählte Programm um 11 Uhr fertig.</p>
+<ng-template [ngIf]="current_run !== undefined"><h1>TEST: {{ current_run.program_runtime }}</h1></ng-template>
+
+
+

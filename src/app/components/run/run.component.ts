@@ -1,16 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Device } from '../../Device';
+import { Run } from '../../Run';
 import { getProgramName, calculateDateRange } from '../template.functions';
 
 @Component({
-  selector: '[device-row]',
-  templateUrl: './device.component.html',
-  styleUrls: ['./device.component.css']
+  selector: '[run-table-row]',
+  templateUrl: './run.component.html',
+  styleUrls: ['./run.component.css']
 })
-export class DeviceComponent implements OnInit {
+export class RunComponent implements OnInit {
   public getProgramName = getProgramName;
   public calculateDateRange = calculateDateRange;
-  @Input() device!: Device;
+  @Input() run!: Run;
 
   constructor() { }
 
