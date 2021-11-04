@@ -1,58 +1,111 @@
-<h3>Laufzeit noch ~44 min.</h3>
 
-<div class="progress">
-  <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 11%"></div>
-</div>
-<br>
+<!--<div *ngIf="current_run !== undefined; then data_available else loading_data"></div>-->
+<div *ngIf="isEmptyObject(current_run); then data_available else loading_data"></div>
 
-<div class="row text-center">
-  <div class="col-5">
-    <div class="btn-group-vertical mr-2" role="group" aria-label="First group">
-      <button type="button" class="btn btn-secondary">Stop - Start</button>
-      <button type="button" class="btn btn-secondary active"><div class="spinner-grow spinner-grow-sm" role="status"></div> 1. Vorspülen</button>
-      <button type="button" class="btn btn-secondary"><div class="spinner-grow spinner-grow-sm" role="status"></div> 2. Vorspülen</button>
-      <button type="button" class="btn btn-secondary"><div class="spinner-grow spinner-grow-sm" role="status"></div> Reinigen</button>
-      <button type="button" class="btn btn-secondary"><div class="spinner-grow spinner-grow-sm" role="status"></div> Zwichenspülen</button>
-      <button type="button" class="btn btn-secondary"><div class="spinner-grow spinner-grow-sm" role="status"></div> Klarspülen</button>
-      <button type="button" class="btn btn-secondary"><div class="spinner-grow spinner-grow-sm" role="status"></div> Trocknen</button>
-      <button type="button" class="btn btn-secondary"><div class="spinner-grow spinner-grow-sm" role="status"></div> Auslaufen</button>
+<ng-template #data_available>
+  <h3 class="mt-3">Laufzeit noch ~{{ (current_run?.program_time_left_program || 0) / 60 | number: '1.0-0' }} min.</h3>
+
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: {{ current_run?.program_progress_percent }}%"></div>
+  </div>
+  <br>
+
+  <div class="row text-center">
+    <div class="col-5">
+      <div class="btn-group-vertical mr-2" role="group" aria-label="First group">
+        <button type="button" class="btn btn-secondary" [ngClass]="{'active': current_run == undefined}">
+          <div class="spinner-grow spinner-grow-sm" *ngIf="current_run == undefined" role="status"></div> Stop - Start</button>
+        <button type="button" class="btn btn-secondary" [ngClass]="{'active': current_run?.program_step_sequence == 1}">
+          <div class="spinner-grow spinner-grow-sm" *ngIf="current_run?.program_step_sequence == 1" role="status"></div> 1. Vorspülen</button>
+        <button type="button" class="btn btn-secondary" [ngClass]="{'active': current_run?.program_step_sequence == 2}">
+          <div class="spinner-grow spinner-grow-sm" *ngIf="current_run?.program_step_sequence == 2" role="status"></div> 2. Vorspülen</button>
+        <button type="button" class="btn btn-secondary" [ngClass]="{'active': current_run?.program_step_sequence == 3}">
+          <div class="spinner-grow spinner-grow-sm" *ngIf="current_run?.program_step_sequence == 3" role="status"></div> Reinigen</button>
+        <button type="button" class="btn btn-secondary" [ngClass]="{'active': current_run?.program_step_sequence == 4}">
+          <div class="spinner-grow spinner-grow-sm" *ngIf="current_run?.program_step_sequence == 4" role="status"></div> Zwichenspülen</button>
+        <button type="button" class="btn btn-secondary" [ngClass]="{'active': current_run?.program_step_sequence == 5}">
+          <div class="spinner-grow spinner-grow-sm" *ngIf="current_run?.program_step_sequence == 5" role="status"></div> Klarspülen</button>
+        <button type="button" class="btn btn-secondary" [ngClass]="{'active': current_run?.program_step_sequence == 6}">
+          <div class="spinner-grow spinner-grow-sm" *ngIf="current_run?.program_step_sequence == 6" role="status"></div> Trocknen</button>
+        <button type="button" class="btn btn-secondary" [ngClass]="{'active': current_run?.program_step_sequence == 7}">
+          <div class="spinner-grow spinner-grow-sm" *ngIf="current_run?.program_step_sequence == 7" role="status"></div> Auslaufen</button>
+      </div>
+    </div>
+    <div class="col-7">
+        <ngx-gauge
+          [value]="gaugeValue"
+          [thick]="gaugeThickness"
+          [min]="gaugeMin"
+          [max]="gaugeMax"
+          label="Temperatur"
+          type="semi"
+          append="°C">
+          <ngx-gauge-prepend *ngIf="current_run?.machine_sensor_values.heating == 1">
+            <fa-icon [icon]="faCaretUp" style="color: green">></fa-icon>
+          </ngx-gauge-prepend>
+        </ngx-gauge>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="pump_circulation"
+               [attr.checked]="current_run?.machine_sensor_values.pump_circulation ? '' : null">
+        <label class="form-check-label" for="pump_circulation">Umwälzpumpe</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="pump_drain"
+               [attr.checked]="current_run?.machine_sensor_values.pump_drain ? '' : null">
+        <label class="form-check-label" for="pump_drain">Ablaufpumpe</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="valve_inlet"
+               [attr.checked]="current_run?.machine_sensor_values.valve_inlet ? '' : null">
+        <label class="form-check-label" for="valve_inlet"><fa-icon [icon]="faSignInAlt"></fa-icon> Wassereinlauf</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="valve_outlet"
+               [attr.checked]="current_run?.machine_sensor_values.valve_outlet ? '' : null">
+        <label class="form-check-label" for="valve_outlet"><fa-icon [icon]="faSignOutAlt"></fa-icon> Wasserablauf</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="heating"
+               [attr.checked]="current_run?.machine_sensor_values.heating ? '' : null">
+        <label class="form-check-label" for="heating"><fa-icon [icon]="faTemperatureHigh"></fa-icon> Heizkörper</label>
+      </div>
     </div>
   </div>
-  <div class="col-7">
-      <ngx-gauge
-        [value]="gaugeValue"
-        [thick]="gaugeThickness"
-        [min]="gaugeMin"
-        [max]="gaugeMax"
-        label="Temperatur"
-        type="semi"
-        append="°C">
-      </ngx-gauge>
-    <table>
-      <tr>
-        <th><input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-on="AN" data-off="AUS" disabled></th>
-        <th>Umwelzpumpe</th>
-      </tr>
-      <tr>
-        <th><input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-on="AN" data-off="AUS" disabled></th>
-        <th>Ablaufpumpe</th>
-      </tr>
-      <tr>
-        <th><input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-on="AN" data-off="AUS" disabled></th>
-        <th>Einlaufventil</th>
-      </tr>
-      <tr>
-        <th><input type="checkbox" data-toggle="toggle" data-onstyle="success" data-on="AN" data-off="AUS" disabled></th>
-        <th>Heizung</th>
-      </tr>
-    </table>
+
+  <br>
+
+  <p>Nach aktueller vorhersage ist das gewählte Programm um 11 Uhr fertig.</p>
+  <ng-template [ngIf]="current_run !== undefined"><h1>TEST: {{ current_run?.program_runtime }}</h1></ng-template>
+
+  <!--
+  <ng-template [ngIf]="temperature_series !== undefined">
+    <ngx-charts-line-chart
+      [results]="temperature_series"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="false"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [autoScale]="autoScale" style="fill: white;">
+    </ngx-charts-line-chart>
+    {{ temperature_series.series }}
+  </ng-template>
+  -->
+  <br><br>
+  {{ current_run | json }}
+</ng-template>
+<ng-template #loading_data>
+  <div class="loading">
+    <div class="loading-text">
+      <span class="loading-text-words">L</span>
+      <span class="loading-text-words">O</span>
+      <span class="loading-text-words">A</span>
+      <span class="loading-text-words">D</span>
+      <span class="loading-text-words">I</span>
+      <span class="loading-text-words">N</span>
+      <span class="loading-text-words">G</span>
+    </div>
   </div>
-</div>
-
-<br>
-
-<p>Nach aktueller vorhersage ist das gewählte Programm um 11 Uhr fertig.</p>
-<ng-template [ngIf]="current_run !== undefined"><h1>TEST: {{ current_run.program_runtime }}</h1></ng-template>
-
-
-
+</ng-template>

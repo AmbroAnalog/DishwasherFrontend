@@ -5,9 +5,11 @@ import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { NgxGaugeModule } from "ngx-gauge";
 import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppRoutingModule } from './app-routing.module';
-import { isOnline, isRunning } from './dishwasher.pipe';
+import { isOnline, isRunning, getRuntimeLeft } from './dishwasher.pipe';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
@@ -28,6 +30,7 @@ const config: SocketIoConfig = { url: environment.api_root_url, options: {} };
     RunComponent,
     isOnline,
     isRunning,
+    getRuntimeLeft,
     LiveComponent
   ],
   imports: [
@@ -37,7 +40,9 @@ const config: SocketIoConfig = { url: environment.api_root_url, options: {} };
     FormsModule,
     HttpClientModule,
     NgxGaugeModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    BrowserAnimationsModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

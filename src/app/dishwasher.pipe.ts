@@ -27,3 +27,10 @@ export class isRunning implements PipeTransform {
     }
   }
 }
+
+@Pipe({name: 'getRuntimeLeft'})
+export class getRuntimeLeft implements PipeTransform {
+  transform(object: Run): number {
+    return Math.round(object.program_time_left_program / 60)
+  }
+}
