@@ -41,7 +41,7 @@ export class LiveComponent implements OnInit {
   constructor(public socket: SocketService, private requestService: RequestService) { }
 
   ngOnInit(): void {
-
+    //TODO: get interesting device_document_id dynamically by last last seen!
     let ret = this.requestService.getLastRun('63023376c4cf1d86502e9c3f');
 
     this.requestService.subject_device.subscribe(data => {

@@ -9,7 +9,7 @@ import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppRoutingModule } from './app-routing.module';
-import { isOnline, isRunning, getRuntimeLeft } from './dishwasher.pipe';
+import { isOnline, isNotEndedPipe, isNotAbandonedPipe, getRuntimeLeft } from './dishwasher.pipe';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
@@ -29,7 +29,8 @@ const config: SocketIoConfig = { url: environment.api_root_url, options: {} };
     DeviceComponent,
     RunComponent,
     isOnline,
-    isRunning,
+    isNotEndedPipe,
+    isNotAbandonedPipe,
     getRuntimeLeft,
     LiveComponent
   ],

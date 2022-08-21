@@ -1,5 +1,5 @@
 <br>
-<h2>Device List</h2>
+<h2>Geräteliste</h2>
 <!--<app-device *ngFor="let device of devices" [device]="devices"
             >
 -->
@@ -7,19 +7,9 @@
 </div>
 
 <hr>
+<h2>Historie</h2>
 
-<table class="table table-bordered">
-  <thead>
-  <tr>
-    <th scope="col"></th>
-    <th scope="col">Modus</th>
-    <th scope="col">Zeit</th>
-    <th scope="col">Laufzeit</th>
-  </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let run of runs" run-table-row [run]="run">
-    </tr>
-  </tbody>
-</table>
-
+<div class="row">
+  <div class="col-12" *ngFor="let run of runs" run-table-row [run]="run">
+  </div>
+</div>

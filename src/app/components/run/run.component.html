@@ -1,7 +1,48 @@
+<!--[ngClass]="(run | isNotEnded) ? 'bg-primary': ''"-->
+<div *ngIf="((run | isNotEnded) && (run | isNotAbandoned)); then card_active else card_passive"></div>
+
+<ng-template #card_active>
+  <div class="card bg-primary">
+    <div class="card-header text-muted">
+      <div class="row" style="height: 24px">
+        <div class="col-auto"><div class="blob"></div></div>
+        <div class="col">noch {{ (run.program_time_left_program / 60) | number: '1.0-0' }} Minuten</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ getProgramName(run.program_selected_id) }}</h5>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: {{ run.program_progress_percent }}%"></div>
+      </div>
+      <h6 class="card-subtitle mb-2 mt-2 text-muted">Programmschritt '{{ getSequenceName(run.program_step_sequence) }}'</h6>
+      <p class="card-text">Nach aktueller Vorhersage ist das gewählte Programm um <b>{{ calculateTimePrediction(run.program_time_left_program) }}</b> Uhr fertig.</p>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #card_passive>
+  <div class="card" [ngClass]="{ 'bg-danger': !(run | isNotAbandoned) }">
+    <div class="card-header text-muted">
+      vor {{ calculateDateRange(run.program_time_start) }}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ getProgramName(run.program_selected_id) }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div>
+  </div>
+</ng-template>
+
 <th scope="row"></th>
 <td>{{ getProgramName(run.program_selected_id) }}</td>
 <td>vor {{ calculateDateRange(run.program_time_start) }}</td>
 <td>{{ run.program_runtime / 60 | number: '1.0-0' }} minuten
-  <div *ngIf="run | isRunning; then thenBlock"></div>
+  <div *ngIf="run | isNotEnded; then thenBlock"></div>
   <ng-template #thenBlock><b>running...</b></ng-template>
 </td>
+<!--
+{{ run | json }}
+{{ run | isNotAbandoned }}
+-->

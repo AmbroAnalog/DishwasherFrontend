@@ -42,6 +42,41 @@ export function getProgramName(programID: number): any {
   return programName;
 }
 
+export function getSequenceName(step_sequence: number): string {
+  let programName = "Stop - Start";
+  switch (step_sequence) {
+    case 1: {
+      programName = "1. Vorspülen";
+      break;
+    }
+    case 2: {
+      programName = "2. Vorspülen";
+      break;
+    }
+    case 3: {
+      programName = "Reinigen";
+      break;
+    }
+    case 4: {
+      programName = "Zwichenspülen";
+      break;
+    }
+    case 5: {
+      programName = "Klarspülen";
+      break;
+    }
+    case 6: {
+      programName = "Trocknen";
+      break;
+    }
+    case 7: {
+      programName = "Auslaufen";
+      break;
+    }
+  }
+  return programName;
+}
+
 export function calculateDateRange(date: number): string {
   let currentDate = Date.now() / 1000 | 0;
   let range = currentDate - date;
