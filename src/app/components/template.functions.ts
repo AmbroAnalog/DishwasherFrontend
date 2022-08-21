@@ -61,3 +61,16 @@ export function calculateDateRange(date: number): string {
     return String(value) + (value == 1 ? " Tag" : " Tagen");
   }
 }
+
+export function calculateTimePrediction(time_left: number | undefined): string {
+  let timestamp = Math.floor((Date.now() / 1000) + Number(time_left))
+  let spot = new Date(timestamp * 1000);
+
+  return spot.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+}
+
+export function calculateEnergyCosts(used_energy: number | undefined): string {
+  let energy = Number(used_energy);
+  let costs = (energy / 1000) * 0.36;
+  return costs.toFixed(2);
+}

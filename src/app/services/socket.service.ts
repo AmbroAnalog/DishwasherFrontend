@@ -11,9 +11,13 @@ import { Run } from '../Run';
 })
 export class SocketService {
 
-  constructor(private socket: Socket) { }
+  constructor(private socket: Socket) {}
 
   getRunStatus() {
     return this.socket.fromEvent('device-data').pipe(map((data: any) => data));
+  }
+
+  getTemperatureSeries() {
+    return this.socket.fromEvent('temperature_series').pipe(map((data: any) => data));
   }
 }

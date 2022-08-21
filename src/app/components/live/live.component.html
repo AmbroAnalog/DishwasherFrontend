@@ -74,27 +74,35 @@
 
   <br>
 
-  <p>Nach aktueller vorhersage ist das gewählte Programm um 11 Uhr fertig.</p>
-  <ng-template [ngIf]="current_run !== undefined"><h1>TEST: {{ current_run?.program_runtime }}</h1></ng-template>
+  <div class="row text-center">
+    <div class="col-6">
+      <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header"><fa-icon [icon]="faPlug"></fa-icon> Leistung</div>
+        <div class="card-body text-light" style="height: 80px">
+          <h5 class="card-title">{{ current_run?.machine_apower }} Watt</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header"><fa-icon [icon]="faBolt"></fa-icon> Energie</div>
+        <div class="card-body text-light" style="height: 80px">
+          <h5 class="card-title">{{ current_run?.machine_aenergy }} Wh<br>
+            ~ {{ calculateEnergyCosts(current_run?.machine_aenergy) }} €</h5>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <!--
-  <ng-template [ngIf]="temperature_series !== undefined">
-    <ngx-charts-line-chart
-      [results]="temperature_series"
-      [gradient]="gradient"
-      [xAxis]="showXAxis"
-      [yAxis]="showYAxis"
-      [legend]="false"
-      [showXAxisLabel]="showXAxisLabel"
-      [showYAxisLabel]="showYAxisLabel"
-      [yAxisLabel]="yAxisLabel"
-      [autoScale]="autoScale" style="fill: white;">
-    </ngx-charts-line-chart>
-    {{ temperature_series.series }}
-  </ng-template>
-  -->
-  <br><br>
+  <p>Nach aktueller vorhersage ist das gewählte Programm um <b>{{ calculateTimePrediction(current_run?.program_time_left_program) }}</b> Uhr fertig.</p>
+
+  <hr><br><br>
+  <h1><i>Debug Nachrichten:</i></h1>
+  <ng-template [ngIf]="current_run !== undefined"><h4>TEST = {{ current_run?.program_runtime }}</h4></ng-template>
+  <br>
   {{ current_run | json }}
+  <br><br>
+  {{ temperature_series | json }}
 </ng-template>
 <ng-template #loading_data>
   <div class="loading">

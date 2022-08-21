@@ -15,4 +15,6 @@ export interface Run {
   program_time_left_program: number;
   machine_temperature: number;
   machine_sensor_values: any;
+  machine_aenergy: number;
+  machine_apower: number;
 }

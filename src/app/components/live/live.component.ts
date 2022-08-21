@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxGaugeModule } from "ngx-gauge";
-import { faSignInAlt, faSignOutAlt, faTemperatureHigh, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import { faSignInAlt, faSignOutAlt, faTemperatureHigh, faCaretUp, faPlug, faBolt } from "@fortawesome/free-solid-svg-icons";
 import { SocketService } from "../../services/socket.service";
 import { RequestService } from '../../services/request.service';
 import { Run } from '../../Run';
 import { TempSeries } from '../../TempSeries';
+import { calculateTimePrediction, calculateEnergyCosts } from '../template.functions';
 
 @Component({
   selector: 'app-live',
@@ -14,75 +15,34 @@ import { TempSeries } from '../../TempSeries';
 export class LiveComponent implements OnInit {
   current_run?: Run;
   temperature_series?: TempSeries;
+  public calculateTimePrediction = calculateTimePrediction;
+  public calculateEnergyCosts = calculateEnergyCosts;
 
   faSignInAlt = faSignInAlt;
   faSignOutAlt = faSignOutAlt;
   faTemperatureHigh = faTemperatureHigh;
   faCaretUp = faCaretUp;
+  faPlug = faPlug;
+  faBolt = faBolt;
 
   gaugeValue = 22;
   gaugeThickness = 20;
   gaugeMin = 10;
   gaugeMax = 60;
 
-  multi = [
-    {
-      "name": "Germany",
-      "series": [
-        {
-          "name": "2010",
-          "value": 7300000
-        },
-        {
-          "name": "2011",
-          "value": 8940000
-        }
-      ]
-    },
-
-    {
-      "name": "USA",
-      "series": [
-        {
-          "name": "2010",
-          "value": 7870000
-        },
-        {
-          "name": "2011",
-          "value": 8270000
-        }
-      ]
-    },
-
-    {
-      "name": "France",
-      "series": [
-        {
-          "name": "2010",
-          "value": 5000002
-        },
-        {
-          "name": "2011",
-          "value": 5800000
-        }
-      ]
-    }
+  saleData = [
+    { name: "Mobiles", value: 105000 },
+    { name: "Laptop", value: 55000 },
+    { name: "AC", value: 15000 },
+    { name: "Headset", value: 150000 },
+    { name: "Fridge", value: 20000 }
   ];
-
-  // options
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showXAxisLabel = true;
-  showYAxisLabel = true;
-  yAxisLabel = 'Population';
-  autoScale = true;
 
   constructor(public socket: SocketService, private requestService: RequestService) { }
 
   ngOnInit(): void {
-    /**
-    let ret = this.requestService.getLastRun('618429c1fa82d3b357ac32df');
+
+    let ret = this.requestService.getLastRun('63023376c4cf1d86502e9c3f');
 
     this.requestService.subject_device.subscribe(data => {
 
@@ -93,13 +53,18 @@ export class LiveComponent implements OnInit {
     this.requestService.subject_temps.subscribe(data => {
       this.temperature_series = data
     })
-    **/
 
     this.socket.getRunStatus().subscribe(data => {
       console.log('RESIVE subscribtion on "getRunStatus"')
       this.current_run = data as Run;
       this.gaugeValue = this.current_run.machine_temperature;
     })
+
+    this.socket.getTemperatureSeries().subscribe(data => {
+      console.log('RESIVE temperature_series')
+      this.temperature_series = data as TempSeries;
+    })
+
   }
 
   isEmptyObject(obj: any): boolean {
