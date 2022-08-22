@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+    angular-nginx-docker:
+        container_name: dishwasher-frontend
+        build: .
+        image: dishwasher-frontend-image
+        environment:
+            NODE_ENV: production
+        ports:
+          - "80:80"
