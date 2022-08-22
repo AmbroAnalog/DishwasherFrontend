@@ -33,8 +33,8 @@ export class isNotAbandonedPipe implements PipeTransform {
     let currentDate = Date.now() / 1000 | 0;
     if (object.program_time_start !== null) {
       let startTimeGap = currentDate - object.program_time_start;
-      // standart = 9000
-      if (object.program_time_end === null && startTimeGap > 120000000) {
+      // standard = 9000
+      if (object.program_time_end === null && startTimeGap > 9000) {
         return false;
       }
     }

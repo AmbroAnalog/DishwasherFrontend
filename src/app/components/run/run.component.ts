@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Run } from '../../Run';
-import { getProgramName, getSequenceName, calculateDateRange, calculateTimePrediction } from '../template.functions';
+import { getProgramName, getSequenceName, calculateDateRange, calculateTimePrediction, calculateEnergyCosts } from '../template.functions';
 
 @Component({
   selector: '[run-table-row]',
@@ -12,6 +12,7 @@ export class RunComponent implements OnInit {
   public calculateDateRange = calculateDateRange;
   public getSequenceName = getSequenceName;
   public calculateTimePrediction = calculateTimePrediction;
+  public calculateEnergyCosts = calculateEnergyCosts;
   @Input() run!: Run;
 
   constructor() { }

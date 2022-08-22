@@ -14,6 +14,6 @@
   </div>
 
   <small>{{ device.document_id }}</small>
-  <p>Zuletzt Online: {{ device.last_alive * 1000| date:'HH:mm dd.MM.yyyy' }}</p>
+  <p class="mb-0">Zuletzt Online: {{ device.last_alive * 1000| date:'dd.MM.yyyy, HH:mm' }}</p>
   <p>vor {{ calculateDateRange(device.last_alive) }}</p>
 </div>
