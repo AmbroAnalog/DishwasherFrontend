@@ -1,12 +1,17 @@
 ### STAGE 1: Build ###
 FROM node:16-alpine AS build
-WORKDIR /usr/src/app
-COPY package.json package-lock.json ./
-RUN npm install
+WORKDIR /app
+RUN npm cache clean --force
+
 COPY . .
-RUN npm run build
+
+RUN npm ci
+RUN npm run build:docker
 
 ### STAGE 2: Run ###
-FROM nginx:1.21.3-alpine
+FROM nginx:1.21.3-alpine AS ngx
+
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /usr/src/app/dist/DishwasherFrontend /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
+
+EXPOSE 80
