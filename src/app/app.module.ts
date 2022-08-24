@@ -5,7 +5,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { NgxGaugeModule } from "ngx-gauge";
 import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
-import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +17,7 @@ import { RunComponent } from './components/run/run.component';
 import { LiveComponent } from './components/live/live.component';
 
 import { environment } from '../environments/environment';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 const config: SocketIoConfig = { url: environment.api_root_url, options: {} };
 
@@ -43,7 +43,12 @@ const config: SocketIoConfig = { url: environment.api_root_url, options: {} };
     NgxGaugeModule,
     SocketIoModule.forRoot(config),
     BrowserAnimationsModule,
-    NgxChartsModule
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

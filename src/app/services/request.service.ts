@@ -5,8 +5,6 @@ import { Observable, Subject } from 'rxjs';
 import { Device } from '../Device';
 import { Run } from '../Run';
 import { TempSeries } from '../TempSeries';
-import {map} from "rxjs/operators";
-import { pipe } from 'rxjs';
 
 
 const httpOptions = {
