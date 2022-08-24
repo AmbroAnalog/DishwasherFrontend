@@ -27,7 +27,10 @@
   <!--<div class="card" [ngClass]="{ 'bg-danger': !(run | isNotAbandoned) }">-->
   <div class="card">
     <div class="card-header text-muted">
-      vor {{ calculateDateRange(run.program_time_start) }} | {{ run.program_time_start * 1000| date:'E, dd.MM.yyyy' }}
+      <div class="d-flex justify-content-between">
+        vor {{ calculateDateRange(run.program_time_start) }} | {{ run.program_time_start * 1000| date:'E, dd.MM.yyyy' }}
+        <button type="button" class="btn btn-danger btn-extra-sm"><fa-icon [icon]="faTrash"></fa-icon></button>
+      </div>
     </div>
     <div class="card-body">
       <h5 class="card-title">{{ getProgramName(run.program_selected_id) }}</h5>

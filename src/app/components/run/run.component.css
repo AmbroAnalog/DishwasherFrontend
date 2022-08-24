@@ -9,3 +9,9 @@
   transform: scale(1);
   animation: pulse 2s infinite;
 }
+
+.btn-extra-sm {
+  padding: 0rem .5rem;
+  font-size: .9rem;
+  border-radius: .2rem;
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Run } from '../../Run';
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { getProgramName, getSequenceName, calculateDateRange, calculateTimePrediction, calculateEnergyCosts } from '../template.functions';
 
 @Component({
@@ -13,6 +14,9 @@ export class RunComponent implements OnInit {
   public getSequenceName = getSequenceName;
   public calculateTimePrediction = calculateTimePrediction;
   public calculateEnergyCosts = calculateEnergyCosts;
+
+  faTrash = faTrash;
+
   @Input() run!: Run;
 
   constructor() { }
