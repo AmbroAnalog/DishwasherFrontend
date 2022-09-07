@@ -1,0 +1,6 @@
+{{ program_summary | json }}
+
+<div class="row">
+  <div class="col-12" *ngFor="let program of program_summary.program_summary" program-row [program]="program">
+  </div>
+</div>

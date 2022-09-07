@@ -5,6 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { Device } from '../Device';
 import { Run } from '../Run';
 import { TempSeries } from '../TempSeries';
+import { ProgramSummary } from "../ProgramSummary";
 
 
 const httpOptions = {
@@ -22,9 +23,6 @@ export class RequestService {
   public subject_device: Subject<Device> = new Subject();
   public subject_run: Subject<Run> = new Subject();
   public subject_temps: Subject<TempSeries> = new Subject();
-  private obs1: Observable<Device> = this.subject_device.asObservable();
-  private obs2: Observable<Run> = this.subject_run.asObservable();
-  private obs3: Observable<TempSeries> = this.subject_temps.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -43,5 +41,9 @@ export class RequestService {
       this.subject_run.next(data.last_run);
       this.subject_temps.next(data.temperature_series);
     });
+  }
+
+  getProgramSummary(): Observable<ProgramSummary> {
+    return this.http.get<ProgramSummary>(this.api_root_url + 'request/get_program_summary/')
   }
 }
