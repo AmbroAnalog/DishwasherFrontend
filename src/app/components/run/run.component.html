@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{ getProgramName(run.program_selected_id) }}</h5>
+      <h5 class="card-title"><span class="badge bg-primary">No. {{ run.program_selected_id }}</span> {{ getProgramName(run.program_selected_id) }}</h5>
       <div class="progress">
         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: {{ run.program_progress_percent }}%"></div>
       </div>
@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{ getProgramName(run.program_selected_id) }}</h5>
+      <h5 class="card-title"><span class="badge bg-primary">No. {{ run.program_selected_id }}</span> {{ getProgramName(run.program_selected_id) }}</h5>
       <!--<h6 class="card-subtitle mb-2 text-muted">{{ run.program_time_start * 1000| date:'HH:mm dd.MM.yyyy' }}</h6>-->
       <div class="alert alert-warning" role="alert" *ngIf="!(run | isNotAbandoned)">
         Die Programmaufzeichnung wurde nicht vollständig abgeschlossen oder der Spülgang wurde unvorhergesehen abgebrochen!
