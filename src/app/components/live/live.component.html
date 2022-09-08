@@ -44,27 +44,27 @@
             <fa-icon [icon]="faCaretUp" style="color: green">></fa-icon>
           </ngx-gauge-prepend>
         </ngx-gauge>
-      <div class="form-check">
+      <div class="form-check no-click">
         <input class="form-check-input" type="checkbox" value="" id="pump_circulation"
                [attr.checked]="current_run?.machine_sensor_values.pump_circulation ? '' : null">
         <label class="form-check-label" for="pump_circulation">Umwälzpumpe</label>
       </div>
-      <div class="form-check">
+      <div class="form-check no-click">
         <input class="form-check-input" type="checkbox" value="" id="pump_drain"
                [attr.checked]="current_run?.machine_sensor_values.pump_drain ? '' : null">
         <label class="form-check-label" for="pump_drain">Ablaufpumpe</label>
       </div>
-      <div class="form-check">
+      <div class="form-check no-click">
         <input class="form-check-input" type="checkbox" value="" id="valve_inlet"
                [attr.checked]="current_run?.machine_sensor_values.valve_inlet ? '' : null">
         <label class="form-check-label" for="valve_inlet"><fa-icon [icon]="faSignInAlt"></fa-icon> Wassereinlauf</label>
       </div>
-      <div class="form-check">
+      <div class="form-check no-click">
         <input class="form-check-input" type="checkbox" value="" id="valve_outlet"
                [attr.checked]="current_run?.machine_sensor_values.valve_outlet ? '' : null">
         <label class="form-check-label" for="valve_outlet"><fa-icon [icon]="faSignOutAlt"></fa-icon> Wasserablauf</label>
       </div>
-      <div class="form-check">
+      <div class="form-check no-click">
         <input class="form-check-input" type="checkbox" value="" id="heating"
                [attr.checked]="current_run?.machine_sensor_values.heating ? '' : null">
         <label class="form-check-label" for="heating"><fa-icon [icon]="faTemperatureHigh"></fa-icon> Heizkörper</label>
