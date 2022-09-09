@@ -24,7 +24,6 @@
 </ng-template>
 
 <ng-template #card_passive>
-  <!--<div class="card" [ngClass]="{ 'bg-danger': !(run | isNotAbandoned) }">-->
   <div class="card">
     <div class="card-header text-muted">
       <div class="d-flex justify-content-between">
@@ -45,7 +44,9 @@
         </tr>
         <tr>
           <td>Laufzeit:</td>
-          <td>{{ (run.program_runtime / 60) | number: '1.0-0' }} Minuten</td>
+          <td>{{ (run.program_runtime / 60) | number: '1.0-0' }} Minuten
+            <fa-icon class="text-warning" [icon]="faCircleExclamation" *ngIf="!(run | isNotAbandoned)"></fa-icon>
+          </td>
         </tr>
         <tr class="align-text-top">
           <td>benötigte Energie:</td>

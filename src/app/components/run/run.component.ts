@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Run } from '../../Run';
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { getProgramName, getSequenceName, calculateDateRange, calculateTimePrediction, calculateEnergyCosts } from '../template.functions';
 
 @Component({
@@ -16,6 +16,7 @@ export class RunComponent implements OnInit {
   public calculateEnergyCosts = calculateEnergyCosts;
 
   faTrash = faTrash;
+  faCircleExclamation = faCircleExclamation;
 
   @Input() run!: Run;
 
