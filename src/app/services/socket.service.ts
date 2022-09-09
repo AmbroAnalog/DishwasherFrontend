@@ -3,8 +3,8 @@ import { Socket } from 'ngx-socket-io';
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Observable, Observer } from 'rxjs';
-import { Device } from '../Device';
-import { Run } from '../Run';
+import { Device } from '../interfaces/Device';
+import { Run } from '../interfaces/Run';
 
 @Injectable({
   providedIn: 'root'

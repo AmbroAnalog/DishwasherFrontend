@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../../services/request.service';
-import { Device } from '../../Device';
-import { Run } from '../../Run';
+import { Device } from '../../interfaces/Device';
+import { Run } from '../../interfaces/Run';
 import { getProgramName, calculateDateRange } from '../template.functions';
 
 @Component({

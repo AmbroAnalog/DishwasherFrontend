@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../../services/request.service';
-import { ProgramSummary } from "../../ProgramSummary";
+import { ProgramSummary } from "../../interfaces/Summaries";
 
 @Component({
   selector: 'app-summary',

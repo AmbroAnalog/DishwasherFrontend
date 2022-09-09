@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Run } from '../../Run';
+import { Run } from '../../interfaces/Run';
 import { faTrash, faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { getProgramName, getSequenceName, calculateDateRange, calculateTimePrediction, calculateEnergyCosts } from '../template.functions';
 

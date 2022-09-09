@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Program } from "../../Program";
+import { Program } from "../../interfaces/Summaries";
 
 @Component({
   selector: '[program-row]',

@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable, Subject } from 'rxjs';
-import { Device } from '../Device';
-import { Run } from '../Run';
-import { TempSeries } from '../TempSeries';
-import { ProgramSummary } from "../ProgramSummary";
+import { Device } from '../interfaces/Device';
+import { Run } from '../interfaces/Run';
+import { TempSeries } from '../interfaces/TempSeries';
+import { ProgramSummary, TimeSummary } from "../interfaces/Summaries";
 
 
 const httpOptions = {
@@ -45,5 +45,9 @@ export class RequestService {
 
   getProgramSummary(): Observable<ProgramSummary> {
     return this.http.get<ProgramSummary>(this.api_root_url + 'request/get_program_summary/')
+  }
+
+  getTimeSummary(): Observable<TimeSummary> {
+    return this.http.get<TimeSummary>(this.api_root_url + 'request/get_time_summary/')
   }
 }

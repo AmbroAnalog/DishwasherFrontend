@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Device } from '../../Device';
+import { Device } from '../../interfaces/Device';
 import { getProgramName, calculateDateRange } from '../template.functions';
 
 @Component({

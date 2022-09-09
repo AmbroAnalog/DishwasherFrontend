@@ -3,8 +3,8 @@ import { NgxGaugeModule } from "ngx-gauge";
 import { faSignInAlt, faSignOutAlt, faTemperatureHigh, faCaretUp, faPlug, faBolt } from "@fortawesome/free-solid-svg-icons";
 import { SocketService } from "../../services/socket.service";
 import { RequestService } from '../../services/request.service';
-import { Run } from '../../Run';
-import { TempSeries } from '../../TempSeries';
+import { Run } from '../../interfaces/Run';
+import { TempSeries } from '../../interfaces/TempSeries';
 import { calculateTimePrediction, calculateEnergyCosts } from '../template.functions';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Device } from './Device';
-import { Run } from './Run';
+import { Device } from './interfaces/Device';
+import { Run } from './interfaces/Run';
 
 @Pipe({name: 'isOnline'})
 export class isOnline implements PipeTransform {
