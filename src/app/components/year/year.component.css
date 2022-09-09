@@ -1,0 +1,12 @@
+.month-inactive {
+  color: #6c6a6a !important;
+}
+
+.container-fluid {
+  overflow-x: auto; padding: 0;
+}
+
+.container-fluid, .card {
+  min-width: 200px;
+  margin-right: 10px;
+}

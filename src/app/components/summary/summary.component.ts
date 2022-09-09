@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../../services/request.service';
-import { ProgramSummary } from "../../interfaces/Summaries";
+import { ProgramSummary, TimeSummary } from "../../interfaces/Summaries";
 
 @Component({
   selector: 'app-summary',
@@ -9,6 +9,7 @@ import { ProgramSummary } from "../../interfaces/Summaries";
 })
 export class SummaryComponent implements OnInit {
   program_summary: ProgramSummary;
+  time_summary: TimeSummary[] = [];
 
   constructor(private requestService: RequestService) {
     this.program_summary = {} as ProgramSummary;
@@ -16,6 +17,7 @@ export class SummaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.requestService.getProgramSummary().subscribe((program_summary) => (this.program_summary = program_summary))
+    this.requestService.getTimeSummary().subscribe((time_summary) => (this.time_summary = time_summary))
   }
 
 }

@@ -42,6 +42,61 @@ export function getProgramName(programID: number): any {
   return programName;
 }
 
+export function getMonthName(month_number: number): string {
+  let name = "-invalid-";
+  switch (month_number) {
+    case 1: {
+      name = "Januar";
+      break;
+    }
+    case 2: {
+      name = "Februar";
+      break
+    }
+    case 3: {
+      name = "März";
+      break
+    }
+    case 4: {
+      name = "April";
+      break
+    }
+    case 5: {
+      name = "Mai";
+      break
+    }
+    case 6: {
+      name = "Juni";
+      break
+    }
+    case 7: {
+      name = "Juli";
+      break
+    }
+    case 8: {
+      name = "August";
+      break
+    }
+    case 9: {
+      name = "September";
+      break
+    }
+    case 10: {
+      name = "Oktober";
+      break
+    }
+    case 11: {
+      name = "November";
+      break
+    }
+    case 12: {
+      name = "Dezember";
+      break
+    }
+  }
+  return name;
+}
+
 export function getSequenceName(step_sequence: number): string {
   let programName = "Stop - Start";
   switch (step_sequence) {

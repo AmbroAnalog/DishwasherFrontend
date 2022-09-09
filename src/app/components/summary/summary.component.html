@@ -1,6 +1,21 @@
+<!--
 {{ program_summary | json }}
+{{ time_summary | json }}
+<hr><hr>
+-->
 
+<h2 class="mt-2">Jahresübersicht</h2>
+<p>Zusammenfassung aller aufgezeichneten Spüldurchgänge.</p>
+<div id="year-summary-accordion" class="accordion" style="--bs-accordion-color: white;">
+  <div class="accordion-item" *ngFor="let year of time_summary" year-row [year]="year">
+
+  </div>
+</div>
+
+<hr>
+<h2 class="">Programmübersicht</h2>
 <div class="row">
   <div class="col-12" *ngFor="let program of program_summary.program_summary" program-row [program]="program">
   </div>
 </div>
+

@@ -20,7 +20,7 @@ import { environment } from '../environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SummaryComponent } from './components/summary/summary.component';
 import { ProgramComponent } from './components/program/program.component';
-import { MonthComponent } from './components/month/month.component';
+import { YearComponent } from './components/year/year.component';
 
 const config: SocketIoConfig = { url: environment.api_root_url, options: {} };
 
@@ -38,7 +38,7 @@ const config: SocketIoConfig = { url: environment.api_root_url, options: {} };
     LiveComponent,
     SummaryComponent,
     ProgramComponent,
-    MonthComponent
+    YearComponent
   ],
   imports: [
     BrowserModule,

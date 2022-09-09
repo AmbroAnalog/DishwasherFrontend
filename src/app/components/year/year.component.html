@@ -1,0 +1,37 @@
+<div class="accordion-header" id="heading-year-{{ year.year_number }}">
+  <h5 class="mb-0">
+    <button class="accordion-button" type="button" data-bs-toggle="collapse" attr.data-bs-target="#collapse-year-{{ year.year_number }}" aria-expanded="false" attr.aria-controls="collapse-year-{{ year.year_number }}">
+      Statistik des Jahres {{ year.year_number }}
+    </button>
+  </h5>
+</div>
+
+<div id="collapse-year-{{ year.year_number }}" class="accordion-collapse collapse" [class.show] = "year.year_number === current_year"
+     attr.aria-labelledby="heading-year-{{ year.year_number }}" data-bs-parent="#year-summary-accordion">
+  <div class="card-body">
+
+    <div class="container-fluid py-2" >
+      <div class="d-flex flex-row flex-nowrap">
+        <div class="card" *ngFor="let month of year.monthly_summary">
+          <h5 class="card-header"><small class="text-muted mr-3">{{ month.month_number }}</small> ◦ {{ getMonthName(month.month_number) }}</h5>
+          <div class="card-body">
+            <table class="table table-borderless mb-0" [class.month-inactive] = "month.monthly_counter === 0" >
+              <tr>
+                <td>Durchläufe:</td>
+                <td>{{ month.monthly_counter  }} St.</td>
+              </tr>
+              <tr class="align-text-top">
+                <td>Energie:</td>
+                <td>{{ month.monthly_aenergy }} Wh<br>~ {{ calculateEnergyCosts(month.monthly_aenergy) }} €</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-3">
+      Im Jahr {{ year.year_number }} wurden insgesamt {{ year.year_program_counter }} Spüldurchgänge aufgezeichneten.
+    </p>
+ </div>
+</div>
