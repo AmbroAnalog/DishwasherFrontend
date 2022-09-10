@@ -13,7 +13,7 @@
     <div class="container-fluid py-2" >
       <div class="d-flex flex-row flex-nowrap">
         <div class="card" *ngFor="let month of year.monthly_summary">
-          <h5 class="card-header"><small class="text-muted mr-3">{{ month.month_number }}</small> ◦ {{ getMonthName(month.month_number) }}</h5>
+          <h5 class="card-header"><small class="text-muted mr-3">{{ month.month_number }} •</small> {{ getMonthName(month.month_number) }}</h5>
           <div class="card-body">
             <table class="table table-borderless mb-0" [class.month-inactive] = "month.monthly_counter === 0" >
               <tr>
@@ -30,8 +30,15 @@
       </div>
     </div>
 
-    <p class="mt-3">
-      Im Jahr {{ year.year_number }} wurden insgesamt {{ year.year_program_counter }} Spüldurchgänge aufgezeichneten.
-    </p>
+    <table class="table table-borderless mb-0 mt-3">
+      <tr>
+        <td>Durchläufe im Jahr {{ year.year_number }}:</td>
+        <td>{{ year.year_program_counter  }} St.</td>
+      </tr>
+      <tr class="align-text-top">
+        <td>Energie im Jahr {{ year.year_number }}:</td>
+        <td>{{ year.year_program_aenergy }} Wh<br>~ {{ calculateEnergyCosts(year.year_program_aenergy) }} €</td>
+      </tr>
+    </table>
  </div>
 </div>

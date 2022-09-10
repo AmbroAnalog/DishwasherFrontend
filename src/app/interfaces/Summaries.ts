@@ -21,6 +21,7 @@ export interface Program {
 export interface TimeSummary {
   year_number: number;
   year_program_counter: number;
+  year_program_aenergy: number;
   month_count: number;
   monthly_summary: Month[]
 }
