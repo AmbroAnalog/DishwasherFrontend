@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faListUl, faMagnifyingGlassChart, faEye } from "@fortawesome/free-solid-svg-icons";
+import { faListUl, faMagnifyingGlassChart, faEye, faInfo } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-header',
@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
   faListUl = faListUl;
   faMagnifyingGlassChart = faMagnifyingGlassChart;
   faEye = faEye;
+  faInfo = faInfo;
 
   constructor() { }
 
