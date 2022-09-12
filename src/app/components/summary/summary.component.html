@@ -16,7 +16,7 @@
 <h1 class="">Programmübersicht</h1>
 <p>Die Programmübersicht erfasst alle durchgeführten Spüldurchgänge seit aufzeichnungsbeginn am <b>{{ program_summary.firstrun_time * 1000| date:'dd.MM.yyyy' }}</b> (älteste Messung).</p>
 <div class="row">
-  <div class="col-12" *ngFor="let program of program_summary.program_summary" program-row [program]="program">
+  <div class="col-12 col-lg-6 col-xl-4" *ngFor="let program of program_summary.program_summary" program-row [program]="program">
   </div>
 </div>
 
