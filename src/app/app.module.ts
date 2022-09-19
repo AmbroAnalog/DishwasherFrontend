@@ -22,6 +22,7 @@ import { SummaryComponent } from './components/summary/summary.component';
 import { ProgramComponent } from './components/program/program.component';
 import { YearComponent } from './components/year/year.component';
 import { AboutComponent } from './components/about/about.component';
+import { NotifyComponent } from './components/notify/notify.component';
 
 const config: SocketIoConfig = { url: environment.api_root_url, options: {} };
 
@@ -40,7 +41,8 @@ const config: SocketIoConfig = { url: environment.api_root_url, options: {} };
     SummaryComponent,
     ProgramComponent,
     YearComponent,
-    AboutComponent
+    AboutComponent,
+    NotifyComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ const config: SocketIoConfig = { url: environment.api_root_url, options: {} };
     SocketIoModule.forRoot(config),
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
+      //enabled: environment.production,
+      enabled: true,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
