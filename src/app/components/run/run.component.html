@@ -2,7 +2,6 @@
   <div *ngIf="((run | isNotEnded) && (run | isNotAbandoned)); then card_active else card_passive"></div>
 </div>
 
-
 <ng-template #card_active>
   <div class="card bg-primary">
     <div class="card-header text-muted">
@@ -12,7 +11,8 @@
           <div class="col-auto"><div class="blob"></div></div>
           <div class="col">noch {{ (run.program_time_left_program / 60) | number: '1.0-0' }} Minuten</div>
         </div>
-        <fa-icon [icon]="faHeartPulse" *ngIf=" run.program_runtime % 2 == 0"></fa-icon>
+        <!--<fa-icon [icon]="faHeartPulse" [@dimBox] = "run.program_runtime % 3 == 0 ? 'dimmed' : 'notDimmed'" ></fa-icon>-->
+        <fa-icon @heartBeatTrigger [icon]="faHeartPulse" *ngIf=" run.program_runtime % 3 == 0"></fa-icon>
       </div>
     </div>
     <div class="card-body">
