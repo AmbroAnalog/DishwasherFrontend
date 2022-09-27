@@ -13,6 +13,10 @@ export class SocketService {
 
   constructor(private socket: Socket) {}
 
+  getAliveStatus() {
+    return this.socket.fromEvent('is-alive').pipe(map((data: any) => data));
+  }
+
   getRunStatus() {
     return this.socket.fromEvent('device-data').pipe(map((data: any) => data));
   }
