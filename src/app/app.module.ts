@@ -24,7 +24,8 @@ import { YearComponent } from './components/year/year.component';
 import { AboutComponent } from './components/about/about.component';
 import { NotifyComponent } from './components/notify/notify.component';
 
-const config: SocketIoConfig = { url: environment.api_root_url, options: {} };
+const config: SocketIoConfig = { url: environment.api_root_url,
+  options: { transports: ['polling'], path: environment.socketio_path } }
 
 @NgModule({
   declarations: [
