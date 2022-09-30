@@ -19,7 +19,8 @@ export class UpdateService {
   }
 
   private promptUser(): void {
-    console.log('updating to new version');
-    this.updates.activateUpdate().then(() => document.location.reload());
+    if (confirm("New version available. Load New Version?")) {
+      this.updates.activateUpdate().then(() => document.location.reload());
+    }
   }
 }
