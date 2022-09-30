@@ -27,6 +27,10 @@ export class RequestService {
 
   constructor(private http: HttpClient) { }
 
+  getBackendHealth() {
+    return this.http.get(this.api_root_url + 'health')
+  }
+
   getDevices(): Observable<Device[]> {
     return this.http.get<Device[]>(this.api_root_url + 'request/get_all_devices/')
   }
