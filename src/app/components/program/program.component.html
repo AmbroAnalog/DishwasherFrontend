@@ -26,7 +26,7 @@
       </tr>
       <tr class="align-text-top">
         <td>mittlere Energie:</td>
-        <td>{{ program.program_aenergy_average }} Wh<br>~ {{ calculateEnergyCosts(program.program_aenergy_average) }} €</td>
+        <td>{{ program.program_aenergy_average | number: '1.0-1' }} Wh<br>~ {{ calculateEnergyCosts(program.program_aenergy_average) }} €</td>
       </tr>
     </table>
     <hr class="low-profile">
