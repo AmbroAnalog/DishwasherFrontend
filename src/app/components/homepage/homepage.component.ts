@@ -31,7 +31,14 @@ export class HomepageComponent implements OnInit {
 
     this.socket.getRunStatus().subscribe(data => {
       const current_run_index = this.runs.findIndex(x => x.session_id == data.session_id);
-      this.runs[current_run_index] = data;
+      if (current_run_index == -1) {
+        //run is not in current list. reload...
+        this.requestService.getRuns().subscribe((runs) => (this.runs = runs));
+        console.log('add new run to run list');
+        //this.runs.push(data);
+      } else {
+        this.runs[current_run_index] = data;
+      }
     })
     this.socket.getAliveStatus().subscribe(data => {
       const current_device_index = this.devices.findIndex(x => x.unique_device_identifier == data.unique_device_identifier);
