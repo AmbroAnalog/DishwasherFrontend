@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UpdateService } from './services/update.service';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'DishwasherFrontend';
 
+  constructor(private sw: UpdateService) {
+    // check the service worker for updates
+    this.sw.checkForUpdates();
+  }
 }

@@ -44,3 +44,7 @@ testem.log
 .DS_Store
 .directory
 Thumbs.db
+
+# (nginx) web server config & certificates
+/server/nginx/*.conf
+/server/certbot/*

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 import { NgxGaugeModule } from "ngx-gauge";
 import { faSignInAlt, faSignOutAlt, faTemperatureHigh, faCaretUp, faPlug, faBolt } from "@fortawesome/free-solid-svg-icons";
 import { SocketService } from "../../services/socket.service";
@@ -38,26 +39,20 @@ export class LiveComponent implements OnInit {
     { name: "Fridge", value: 20000 }
   ];
 
-  constructor(public socket: SocketService, private requestService: RequestService) { }
+  constructor(public socket: SocketService, private requestService: RequestService, private router: Router) { }
 
   ngOnInit(): void {
     //TODO: get interesting device_document_id dynamically by last last seen!
-    let ret = this.requestService.getLastRun('63023376c4cf1d86502e9c3f');
-
-    this.requestService.subject_device.subscribe(data => {
-
-    })
-    this.requestService.subject_run.subscribe(data => {
-      this.current_run = data
-    })
-    this.requestService.subject_temps.subscribe(data => {
-      this.temperature_series = data
-    })
+    //this.requestService.getLastRun('63023376c4cf1d86502e9c3f');
 
     this.socket.getRunStatus().subscribe(data => {
       console.log('RESIVE subscribtion on "getRunStatus"')
       this.current_run = data as Run;
       this.gaugeValue = this.current_run.machine_temperature;
+      if (this.current_run.program_time_end != null) {
+        console.log('detect finished running');
+        this.router.navigateByUrl('')
+      }
     })
 
     this.socket.getTemperatureSeries().subscribe(data => {

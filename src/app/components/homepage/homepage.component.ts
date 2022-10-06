@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { SwPush } from "@angular/service-worker";
 import { SocketService } from "../../services/socket.service";
 import { RequestService } from '../../services/request.service';
+import { NotificationService } from "../../services/notification.service";
 import { Device } from '../../interfaces/Device';
 import { Run } from '../../interfaces/Run';
+import { environment } from "../../../environments/environment";
 import { getProgramName, calculateDateRange } from '../template.functions';
 
 @Component({
@@ -16,7 +19,11 @@ export class HomepageComponent implements OnInit {
   devices: Device[] = [];
   runs: Run[] = [];
 
-  constructor(public socket: SocketService, private requestService: RequestService) { }
+  constructor(
+    public socket: SocketService,
+    private requestService: RequestService,
+    private swPush: SwPush,
+    private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.requestService.getDevices().subscribe((devices) => (this.devices = devices))
@@ -30,5 +37,15 @@ export class HomepageComponent implements OnInit {
       const current_device_index = this.devices.findIndex(x => x.unique_device_identifier == data.unique_device_identifier);
       this.devices[current_device_index] = data;
     })
+
+    this.subscribeToNotifications()
+  }
+
+  subscribeToNotifications() {
+    this.swPush.requestSubscription({
+      serverPublicKey: environment.vapid_public_key
+    })
+      .then(sub => this.notificationService.addPushSubscriber(sub).subscribe())
+      .catch(err => console.error("Could not subscribe to notifications", err));
   }
 }
